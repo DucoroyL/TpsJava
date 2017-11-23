@@ -15,7 +15,7 @@ public class Drawing extends Canvas implements Iterable<Shape> {
     DrawingMouseEventHandler handler;
     GraphicsContext gc;
 
-    ArrayList<Shape> shapes;
+    private ArrayList<Shape> shapes;
 
     ArrayList<DrawingObserver> observers ;
 

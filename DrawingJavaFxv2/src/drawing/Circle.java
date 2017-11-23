@@ -16,7 +16,12 @@ public class Circle extends Shape {
         this.radius = radius;
     }
 
-    @Override
+    public Circle(Circle circle) {
+		super(circle.origin);
+		this.radius = circle.radius;
+	}
+
+	@Override
     public void paint(GraphicsContext gc) {
         gc.setFill(Color.YELLOW);
         gc.setStroke(Color.ORANGE);
@@ -33,4 +38,9 @@ public class Circle extends Shape {
     private double distanceToCenter(Point2D p) {
         return Math.abs(this.origin.distance(p));
     }
+
+	@Override
+	public Circle clone() {
+		return new Circle(this);
+	}
 }

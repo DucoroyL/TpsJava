@@ -23,6 +23,9 @@ public class Paint extends Application {
     private Button rectangleButton;
     private ToggleButton groupButton;
     private Button ungroupButton;
+    private Button duplicateButton;
+    private Command commandClear;
+
 
     public static void main(String[] args) {
         launch(Paint.class, args);
@@ -62,7 +65,8 @@ public class Paint extends Application {
         hbox.setStyle("-fx-background-color: #336699;");
 
         clearButton = new Button("Clear");
-        clearButton.setOnAction(new ClearButtonHandler(drawing));
+        commandClear = new CommandClear(drawing);
+        clearButton.setOnAction(new ClearButtonHandler(commandClear));
 
         circleButton = new Button("Cercle");
         circleButton.addEventHandler(ActionEvent.ACTION, new CircleButtonHandler(drawing));
@@ -76,7 +80,10 @@ public class Paint extends Application {
         ungroupButton = new Button("Ungroup");
         ungroupButton.addEventHandler(ActionEvent.ACTION, new UngroupButtonHandler(drawing));
 
-        hbox.getChildren().addAll(clearButton, circleButton, rectangleButton, groupButton, ungroupButton);
+        duplicateButton = new Button("Duplicate");
+        duplicateButton.addEventHandler(ActionEvent.ACTION, new DuplicateButtonHandler(drawing));
+        
+        hbox.getChildren().addAll(clearButton, circleButton, rectangleButton, groupButton, ungroupButton, duplicateButton);
         return hbox;
     }
 }

@@ -25,4 +25,6 @@ public abstract class Shape {
     public void setOrigin(double x, double y) {
         this.origin = new Point2D(x, y);
     }
+    
+    public abstract Shape clone();
 }

@@ -9,13 +9,22 @@ import java.util.Iterator;
 public class Group extends Shape implements Iterable<Shape> {
 
     private ArrayList<Shape> shapes;
+    Point2D init;
 
     public Group() {
         super(new Point2D(0, 0));
         shapes = new ArrayList<>();
     }
 
-    @Override
+    public Group(Group group) {
+		super(group.origin);
+		shapes = new ArrayList<>();
+		for (Shape shape : group){
+			this.addShape(shape.clone());
+		}
+	}
+
+	@Override
     public void paint(GraphicsContext gc) {
         for (Shape shape : shapes) {
             shape.paint(gc);
@@ -52,4 +61,9 @@ public class Group extends Shape implements Iterable<Shape> {
             shape.setOrigin(shape.getOrigin().getX() + tX, shape.getOrigin().getY() + tY);
 
     }
+
+	@Override
+	public Group clone() {
+		return new Group(this);
+	}
 }

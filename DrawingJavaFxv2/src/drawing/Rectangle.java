@@ -12,10 +12,15 @@ public class Rectangle extends Shape {
     private double width;
     private double height;
 
-    public Rectangle(Point2D origin, double width, double height) {
-        super(origin);
+    public Rectangle(Point2D _origin, double width, double height) {
+        super(_origin);
         this.width = width;
         this.height = height;
+    }
+    public Rectangle(Rectangle rectangle) {
+        super(rectangle.origin);
+        this.width = rectangle.width;
+        this.height = rectangle.height;
     }
 
     @Override
@@ -32,4 +37,9 @@ public class Rectangle extends Shape {
         return (p.getX() > origin.getX() && p.getX() < origin.getX()+width &&
                 p.getY() > origin.getY() && p.getY() < origin.getY()+height);
     }
+
+	@Override
+	public Rectangle clone() {
+		return new Rectangle(this);
+	}
 }

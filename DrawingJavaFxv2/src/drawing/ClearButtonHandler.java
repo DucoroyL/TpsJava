@@ -6,14 +6,14 @@ import javafx.event.EventHandler;
 
 public class ClearButtonHandler implements EventHandler<ActionEvent> {
 
-    private Drawing drawing;
+    Command commandClear;
 
-    public ClearButtonHandler(Drawing drawing) {
-        this.drawing = drawing;
+    public ClearButtonHandler(Command commandClear) {
+        this.commandClear = commandClear;
     }
-
+    
     @Override
     public void handle(ActionEvent event) {
-        drawing.clear();
+	   commandClear.execute();
     }
 }
