@@ -26,7 +26,6 @@ public class Paint extends Application {
     private Button duplicateButton;
     private Command commandClear;
 
-
     public static void main(String[] args) {
         launch(Paint.class, args);
     }

@@ -7,8 +7,9 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 
 public class DuplicateButtonHandler implements EventHandler<Event> {
-	Drawing drawing;
 	Shape cloneShape;
+	Command commandClone;
+	Drawing drawing;
 	
 	
 	public DuplicateButtonHandler(Drawing drawing){
@@ -26,8 +27,8 @@ public class DuplicateButtonHandler implements EventHandler<Event> {
 				 
 				 for (Shape shape : drawing) {
 	                    if ( shape.isOn(new Point2D(((MouseEvent) event).getX(), ((MouseEvent) event).getY()))){
-	                    	cloneShape = shape.clone();
-	                    	drawing.addShape(cloneShape);
+	                    	commandClone = new CommandClone(drawing, shape);
+	                    	commandClone.execute();
 	                    	break;
 	                    } 
 	                }
