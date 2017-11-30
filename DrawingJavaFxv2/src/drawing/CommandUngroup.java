@@ -11,7 +11,7 @@ public class CommandUngroup extends Command {
 
 	@Override
 	public void execute() {
-		 for (Shape s: (Group)shapes) {
+		 for (Shape s: (Group)shapes.) {
              drawing.addShape(s);
          }	
 		 for (Shape s: shapes) {
