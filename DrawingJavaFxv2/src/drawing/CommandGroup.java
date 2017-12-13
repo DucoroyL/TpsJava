@@ -15,7 +15,7 @@ public class CommandGroup extends Command {
 	}
 	@Override
 	public void execute() {
-		Group group = new Group();
+		group = new Group();
 		drawing.addShape(group);
 		for (Shape shapes : shapes) {
 	    	group.addShape(shapes);
@@ -25,5 +25,29 @@ public class CommandGroup extends Command {
           drawing.removeShape(shape);
         }
 	    shapes.clear();
+	    CommandHistory.getInstanceHistory().addCommand(this);
+	}
+	
+	public void undo() {
+		for(Shape shapes : group){
+			drawing.addShape(shapes);
+		}
+		drawing.removeShape(group);
+	}
+	
+	public void redo() {
+		drawing.addShape(group);	
+		for (Shape shapes : shapes) {
+	    	group.addShape(shapes);
+	    }
+		
+	    for (Shape shape : group) {
+          drawing.removeShape(shape);
+        }
+	    shapes.clear();
+	}
+	@Override
+	public String toString() {
+		return "Command<Group>";
 	}
 }

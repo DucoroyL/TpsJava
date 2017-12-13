@@ -36,5 +36,4 @@ public class DuplicateButtonHandler implements EventHandler<Event> {
 			 }
 		 }
 	}
-
 }

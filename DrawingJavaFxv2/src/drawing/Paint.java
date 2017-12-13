@@ -24,6 +24,8 @@ public class Paint extends Application {
     private ToggleButton groupButton;
     private Button ungroupButton;
     private Button duplicateButton;
+    private Button undoButton;
+    private Button redoButton;
     private Command commandClear;
 
     public static void main(String[] args) {
@@ -82,7 +84,12 @@ public class Paint extends Application {
         duplicateButton = new Button("Duplicate");
         duplicateButton.addEventHandler(ActionEvent.ACTION, new DuplicateButtonHandler(drawing));
         
-        hbox.getChildren().addAll(clearButton, circleButton, rectangleButton, groupButton, ungroupButton, duplicateButton);
+        undoButton = new Button("Undo");
+        undoButton.addEventHandler(ActionEvent.ACTION, new UndoButtonHandler(drawing));
+        
+        redoButton = new Button("Redo");
+        redoButton.addEventHandler(ActionEvent.ACTION, new RedoButtonHandler(drawing));
+        hbox.getChildren().addAll(clearButton, circleButton, rectangleButton, groupButton, ungroupButton, duplicateButton, undoButton, redoButton);
         return hbox;
     }
 }

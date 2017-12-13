@@ -15,7 +15,14 @@ public class DrawingMouseEventHandler implements EventHandler<MouseEvent> {
     private double orgSceneY;
     private double orgTranslateX;
     private double orgTranslateY;
-
+    
+    private double finSceneX;
+    private double finSceneY;
+    private boolean testMove = false;
+    private double newTranslateX;
+    private double newTranslateY;
+    private Command commandMove;
+    
     private Shape currentShape;
 
     public DrawingMouseEventHandler(Drawing drawing) {
@@ -35,24 +42,32 @@ public class DrawingMouseEventHandler implements EventHandler<MouseEvent> {
                 }
             }
             if (currentShape != null) {
-                orgTranslateX = currentShape.getOrigin().getX();
+                testMove = true;
+            	orgTranslateX = currentShape.getOrigin().getX();
                 orgTranslateY = currentShape.getOrigin().getY();
             }
         }
 
         if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
-            double offsetX = event.getSceneX() - orgSceneX;
-            double offsetY = event.getSceneY() - orgSceneY;
-            double newTranslateX = orgTranslateX + offsetX;
-            double newTranslateY = orgTranslateY + offsetY;
+        	double finSceneX = event.getSceneX();
+        	double finSceneY = event.getSceneY();
+            double offsetX = finSceneX - orgSceneX;
+            double offsetY = finSceneY - orgSceneY;
+            newTranslateX = orgTranslateX + offsetX;
+            newTranslateY = orgTranslateY + offsetY;
 
             if (currentShape != null) {
-                currentShape.setOrigin(newTranslateX, newTranslateY);
-                drawing.repaint();
+            	currentShape.setOrigin(newTranslateX, newTranslateY);	
+            	drawing.repaint();
             }
         }
 
         if (event.getEventType().equals(MouseEvent.MOUSE_RELEASED)) {
+            if (testMove){
+            	commandMove = new CommandMove(drawing, currentShape, orgTranslateX, orgTranslateY, newTranslateX, newTranslateY);
+            }
+            testMove = false;
+        	
             currentShape = null;
         }
     }

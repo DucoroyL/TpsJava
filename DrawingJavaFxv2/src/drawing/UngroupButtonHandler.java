@@ -9,13 +9,11 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
 
 public class UngroupButtonHandler implements EventHandler<Event> {
-
+	Command commandUngroup;
     private Drawing drawing;
-    protected ArrayList<Shape> shapes;
 
     public UngroupButtonHandler(Drawing drawing) {
         this.drawing = drawing;
-        shapes = new ArrayList<>();
     }
 
     @Override
@@ -29,11 +27,8 @@ public class UngroupButtonHandler implements EventHandler<Event> {
                 for (Shape shape : drawing) {
                     if (shape.isOn(new Point2D(((MouseEvent) event).getX(), ((MouseEvent) event).getY()))
                             && shape instanceof Group) {
-                    	shapes.add(shape);
-                        for (Shape s: (Group)shape) {
-                            drawing.addShape(s);
-                        }
-                        drawing.removeShape(shape);
+                    	commandUngroup = new CommandUngroup(drawing,(Group)shape);
+                    	commandUngroup.execute();
                         break;
                     }
                 }

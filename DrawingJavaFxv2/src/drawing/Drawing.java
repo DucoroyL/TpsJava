@@ -15,6 +15,7 @@ public class Drawing extends Canvas implements Iterable<Shape> {
     DrawingMouseEventHandler handler;
     GraphicsContext gc;
 
+
     private ArrayList<Shape> shapes;
 
     ArrayList<DrawingObserver> observers ;
@@ -30,6 +31,9 @@ public class Drawing extends Canvas implements Iterable<Shape> {
         this.addEventHandler(MouseEvent.MOUSE_RELEASED, handler);
     }
 
+    public ArrayList<Shape> getTabShape(){
+    	return shapes;
+    }
     public void addDrawingOberser(DrawingObserver obs) {
         observers.add(obs);
     }
