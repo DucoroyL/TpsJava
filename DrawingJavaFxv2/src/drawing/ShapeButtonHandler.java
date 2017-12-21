@@ -1,5 +1,7 @@
 package drawing;
 
+import java.util.ArrayList;
+
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -14,10 +16,11 @@ public abstract class ShapeButtonHandler implements EventHandler<Event> {
     protected Drawing drawing;
     protected Point2D origin;
     protected Point2D destination;
-
+    private ArrayList<DrawingObserver> observers ;
     protected Shape shape;
 
     public ShapeButtonHandler(Drawing drawing) {
+    	observers = new ArrayList<>();
         this.drawing = drawing;
     }
 

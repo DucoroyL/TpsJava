@@ -1,19 +1,23 @@
 package drawing;
 
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 
-public class MyStatus extends Label implements DrawingObserver {
+public class MyStatus extends HBox implements DrawingObserver {
 
     Drawing drawing;
+    Label label;
+    
 
     public MyStatus(Drawing drawing) {
         this.drawing = drawing;
         drawing.addDrawingOberser(this);
-        this.setText(drawing.nbShapes() + " shape(s)");
+        label = new Label(drawing.nbShapes() + " shape(s) ");
+        this.getChildren().addAll(label);
     }
 
     @Override
     public void update() {
-        this.setText(drawing.nbShapes() + " shape(s)");
+        this.label.setText(drawing.nbShapes() + " shape(s)");
     }
 }

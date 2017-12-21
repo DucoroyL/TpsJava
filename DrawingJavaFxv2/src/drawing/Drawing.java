@@ -17,8 +17,7 @@ public class Drawing extends Canvas implements Iterable<Shape> {
 
 
     private ArrayList<Shape> shapes;
-
-    ArrayList<DrawingObserver> observers ;
+    private ArrayList<DrawingObserver> observers ;
 
     public Drawing() {
         super();
@@ -37,11 +36,10 @@ public class Drawing extends Canvas implements Iterable<Shape> {
     public void addDrawingOberser(DrawingObserver obs) {
         observers.add(obs);
     }
-
     public void removeDrawingObserver(DrawingObserver obs) {
         observers.remove(obs);
     }
-
+    
     private void notifyDrawingObservers() {
         for (DrawingObserver obs: observers)
             obs.update();

@@ -6,8 +6,10 @@ import java.util.Stack;
 public class CommandHistory{
 	private Stack<Command> listRedo = new Stack<Command> ();
 	private Stack<Command> listUndo = new Stack<Command> ();
-	
+    private ArrayList<DrawingObserver> observers ;
+
 	private CommandHistory() {
+		 observers = new ArrayList<>();
 	}
 	
 	private static CommandHistory instanceHistory = null;
@@ -19,8 +21,20 @@ public class CommandHistory{
 		return instanceHistory;
 	}
 	
+    public void addOberser(DrawingObserver obs) {
+        observers.add(obs);
+    }
+    public void removeObserver(DrawingObserver obs) {
+        observers.remove(obs);
+    }
+
+    private void notifyObservers() {
+        for (DrawingObserver obs: observers)
+            obs.update();
+    }
 	public void addCommand (Command command){
 		listUndo.add(command);
+		notifyObservers();
 	}
 	
 	public Stack<Command> returnRedo(){
@@ -44,6 +58,7 @@ public class CommandHistory{
 			command.undo();
 			listRedo.add(command);
 			listUndo.remove(command);
+			notifyObservers();
 		}else throw new Exception("Not enougth actions to undo");
 	}
 	
@@ -51,8 +66,9 @@ public class CommandHistory{
 		if (canDo ()){
 			Command command = listRedo.get(listRedo.size()-1);
 			command.redo();
-			addCommand(command);
+			listUndo.add(command);
 			listRedo.remove(command);
+			notifyObservers();
 		}else throw new Exception("Not enougth actions to undo");
 	}
 }

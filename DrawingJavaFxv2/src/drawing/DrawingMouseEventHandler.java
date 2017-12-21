@@ -1,5 +1,7 @@
 package drawing;
 
+import java.util.ArrayList;
+
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.input.MouseEvent;
@@ -28,7 +30,7 @@ public class DrawingMouseEventHandler implements EventHandler<MouseEvent> {
     public DrawingMouseEventHandler(Drawing drawing) {
         this.drawing = drawing;
     }
-
+    
     @Override
     public void handle(MouseEvent event) {
 
@@ -47,7 +49,7 @@ public class DrawingMouseEventHandler implements EventHandler<MouseEvent> {
                 orgTranslateY = currentShape.getOrigin().getY();
             }
         }
-
+       
         if (event.getEventType().equals(MouseEvent.MOUSE_DRAGGED)) {
         	double finSceneX = event.getSceneX();
         	double finSceneY = event.getSceneY();
